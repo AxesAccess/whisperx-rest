@@ -37,8 +37,6 @@ def transcribe_file():
     params = [f"--{p} {v}" for p, v in request.args.items()]
     params += [f"--output_dir {gettempdir()}"]
 
-    # TODO add parameters check to avoid shell injection
-
     with TemporaryFile() as f:
         subprocess.call(
             "conda run -n whisperx-env whisperx " + " ".join([filename] + params),
