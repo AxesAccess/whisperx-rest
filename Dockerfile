@@ -25,4 +25,4 @@ EXPOSE 5000
 
 ENTRYPOINT ["conda", "run", "-n", "whisperx-env", "gunicorn", \
     "-b", "0.0.0.0:5000", "--timeout", "1800", \
-    "--error-logfile", "gunicorn_error.log", "whisperx-rest.app:app"]
+    "--error-logfile", "gunicorn_error.log", "whisperx_rest.app:app"]
