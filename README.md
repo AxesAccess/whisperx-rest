@@ -17,7 +17,7 @@ git clone https://github.com/AlekseiPrishchepo/whisperX-REST.git && cd whisperX-
 Due to dependencies building container will take time and space. You may need to repeat if failed.
 
 ```bash
-docker build whisperx-rest .
+docker build -t whisperx-rest .
 ```
 
 ## Run
@@ -25,7 +25,7 @@ docker build whisperx-rest .
 Deploy will take time. Don't kill it.
 
 ```bash
-docker run -it -p 5000:5000 --gpus all whisperx-rest
+docker run -idt -p 5001:5000 --gpus all whisperx-rest
 ```
 
 ## Use
@@ -33,14 +33,14 @@ docker run -it -p 5000:5000 --gpus all whisperx-rest
 Send audio in POST request:
 
 ```bash
-curl -s -X POST "http://127.0.0.1:5000/whisperx?output_format=txt" -F "file=@sample/CNVSample227.wav"
+curl -s -X POST "http://127.0.0.1:5001/whisperx?output_format=txt" -F "file=@sample/CNVSample227.wav"
 ```
 First launch will trigger the download of additional files, which will slow down the result. If you get an error, try adding ``&compute_type=int8`` to the query string.
 
 Pass command line parameters for ``whisperx`` in the query string like that:
 
 ```bash
-curl -s -X POST "http://127.0.0.1:5000/whisperx?model=medium&batch_size=4&fp16=False&compute_type=int8&language=en&output_format=json" -F "file=@sample/CNVSample227.wav"
+curl -s -X POST "http://127.0.0.1:5001/whisperx?model=medium&batch_size=4&fp16=False&compute_type=int8&language=en&output_format=json" -F "file=@sample/CNVSample227.wav"
 ```
 
 If you choose ``model`` other than ``small`` (the default), the new model will be downloaded and stored in the container. 
