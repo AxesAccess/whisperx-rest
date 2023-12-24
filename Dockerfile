@@ -4,7 +4,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 
-RUN apt-get update && apt-get upgrade && \
+RUN apt-get update && \
     apt-get install -y --no-install-recommends ffmpeg git
 
 RUN conda create -n whisperx-env python=3.10 
