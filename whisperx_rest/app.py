@@ -6,7 +6,7 @@ import os
 from tempfile import mktemp, gettempdir, TemporaryFile
 import subprocess
 from flask import Flask, request
-from flask_swagger_ui import get_swaggerui_blueprint
+from flask_swagger_ui import get_swaggerui_blueprint  # pylint: disable=import-error
 
 
 app = Flask(__name__)

@@ -4,7 +4,7 @@ import os
 import ast
 import inspect
 import json
-from whisperx import transcribe  # type: ignore
+from whisperx import transcribe  # pylint: disable=import-error; type: ignore
 
 
 def find_args(
