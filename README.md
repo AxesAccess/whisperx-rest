@@ -1,18 +1,21 @@
+[![Pylint](https://github.com/AlekseiPrishchepo/whisperX-REST/actions/workflows/pylint.yml/badge.svg)](https://github.com/AlekseiPrishchepo/whisperX-REST/actions/workflows/pylint.yml)
+
 # whisperX-REST
 The simplest yet fully functional RESTful API for [whisperX](https://github.com/m-bain/whisperX).
 
-## Requirements
+## Requirements 📃
 
-* All the requirements for [whisperX](https://github.com/m-bain/whisperX).
+* [Docker](https://docs.docker.com/get-docker/).
+* GPU with NVIDIA CUDA support (although you can use a CPU, but it will be painfully slow).
 * 100+ GiB disk space.
 
-##  Download
+##  Download ⤵️
 
 ```bash
 git clone https://github.com/AlekseiPrishchepo/whisperX-REST.git && cd whisperX-REST
 ```
 
-## Install
+## Install ⚒️
 
 Due to dependencies building container will take time and space. You may need to repeat if failed.
 
@@ -20,7 +23,7 @@ Due to dependencies building container will take time and space. You may need to
 docker build -t whisperx-rest .
 ```
 
-## Run
+## Run ▶️
 
 Deploy will take time. Don't kill it.
 
@@ -28,7 +31,7 @@ Deploy will take time. Don't kill it.
 docker run -idt -p 5001:5001 --gpus all --name whisperx_rest whisperx-rest
 ```
 
-## Use
+## Use 🖥️
 
 First launch will trigger the download of additional files, which will slow down the result. If you get an error, try setting ``compute_type`` parameter to ``int8``.
 
@@ -38,15 +41,16 @@ If you choose ``model`` other than ``small`` (the default), the new model will b
 
 Note that large models are demanding on GPU memory. You may want to adjust ``batch_size`` and ``compute_type`` parameters.
 
-### Swagger
+### Swagger 🐰
 
 Try Swagger UI in browser at ``http://127.0.0.1:5001/api/docs/``.
 
 </br>
 <img alt="screenshot_swagger" src="figures/screenshot_swagger.png">
 
-### Curl
-Send audio in POST request:
+### Curl 🤓
+
+Send audio in a POST request:
 
 ```bash
 curl -s -X POST "http://127.0.0.1:5001/whisperx?output_format=txt" -F "audio=@sample/CNVSample227.wav"
@@ -58,6 +62,6 @@ Pass command line parameters for ``whisperx`` in the query string like that:
 curl -s -X POST "http://127.0.0.1:5001/whisperx?model=medium&batch_size=4&fp16=False&compute_type=int8&language=en&output_format=json" -F "audio=@sample/CNVSample227.wav"
 ```
 
-## Finally
+## Finally 🙏
 
 Obviously it's not for production use. Do not expose it to public networks.
