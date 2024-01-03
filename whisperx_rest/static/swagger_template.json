@@ -1,0 +1,47 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a RESTful API for whisperX. Send the audio file and command line arguments in a POST request and get the transcription. This project's on GitHub: [whisperX-REST](https://github.com/AlekseiPrishchepo/whisperX-REST). Questions and issues are [welcome](https://github.com/AlekseiPrishchepo/whisperX-REST/issues/).",
+        "version": "0.1.0",
+        "title": "whisperX REST",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "host": "",
+    "basePath": "",
+    "tags": [
+        {
+            "name": "cli",
+            "description": "command line arguments for whisperX"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/whisperx": {
+            "post": {
+                "tags": [
+                    "cli"
+                ],
+                "summary": "transcribes a file",
+                "description": "",
+                "operationId": "transcribe",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        }
+    }
+}

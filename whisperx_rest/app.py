@@ -6,9 +6,21 @@ import os
 from tempfile import mktemp, gettempdir, TemporaryFile
 import subprocess
 from flask import Flask, request
+from flask_swagger_ui import get_swaggerui_blueprint
 
 
 app = Flask(__name__)
+
+SWAGGER_URL = "/api/docs"
+API_URL = "/static/swagger.json"
+
+swaggerui_blueprint = get_swaggerui_blueprint(
+    base_url=SWAGGER_URL,
+    api_url=API_URL,
+    config={"host": ":5001"},  # Swagger UI config overrides
+)
+
+app.register_blueprint(swaggerui_blueprint)
 
 
 @app.route("/whisperx", methods=["POST"])
@@ -22,8 +34,8 @@ def transcribe_file():
     params = []
     audio_file = None
     filename = mktemp()
-    if "file" in request.files:
-        request.files["file"].save(filename)
+    if "audio" in request.files:
+        request.files["audio"].save(filename)
     else:
         audio_file = request.get_data()
         with open(filename, "wb", encoding="utf-8") as f:
@@ -32,6 +44,9 @@ def transcribe_file():
     if "output_format" in request.args.keys():
         output_format = request.args.get("output_format")
     else:
+        output_format = "json"
+
+    if output_format not in ["json", "srt", "tsv", "txt", "vtt"]:
         output_format = "json"
 
     params = [f"--{p} {v}" for p, v in request.args.items()]
@@ -58,4 +73,4 @@ def transcribe_file():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)

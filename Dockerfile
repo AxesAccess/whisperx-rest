@@ -14,15 +14,17 @@ RUN conda update -n base conda
 SHELL ["conda", "run", "-n", "whisperx-env", "/bin/bash", "-c"]
 
 RUN conda install -y pytorch==2.0.0 torchaudio==2.0.0 pytorch-cuda=11.8 -c nvidia -c pytorch
-RUN pip install flask gunicorn
+RUN pip install flask gunicorn flask_swagger_ui
 RUN pip install git+https://github.com/m-bain/whisperx.git whisperx
 
 WORKDIR /root/
 
-COPY . .
+COPY whisperx_rest /root/whisperx_rest
 
-EXPOSE 5000
+RUN python whisperx_rest/configure.py
+
+EXPOSE 5001
 
 ENTRYPOINT ["conda", "run", "-n", "whisperx-env", "gunicorn", \
-    "-b", "0.0.0.0:5000", "--timeout", "1800", \
+    "-b", "0.0.0.0:5001", "--timeout", "1800", \
     "--error-logfile", "gunicorn_error.log", "whisperx_rest.app:app"]
