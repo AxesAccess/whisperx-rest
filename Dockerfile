@@ -20,11 +20,10 @@ RUN pip install git+https://github.com/m-bain/whisperx.git whisperx
 WORKDIR /root/
 
 COPY whisperx_rest /root/whisperx_rest
+COPY gunicorn.conf.py /root/gunicorn.conf.py
 
 RUN python whisperx_rest/configure.py
 
 EXPOSE 5001
 
-ENTRYPOINT ["conda", "run", "-n", "whisperx-env", "gunicorn", \
-    "-b", "0.0.0.0:5001", "--timeout", "1800", \
-    "--error-logfile", "gunicorn_error.log", "whisperx_rest.app:app"]
+ENTRYPOINT ["conda", "run", "-n", "whisperx-env", "gunicorn", "whisperx_rest.app:app"]
