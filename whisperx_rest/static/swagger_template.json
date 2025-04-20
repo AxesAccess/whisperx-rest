@@ -1,7 +1,7 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a RESTful API for whisperX. Send the audio file and command line arguments in a POST request and get the transcription. This project's on GitHub: [whisperX-REST](https://github.com/AlekseiPrishchepo/whisperX-REST). Questions and issues are [welcome](https://github.com/AlekseiPrishchepo/whisperX-REST/issues/).",
+        "description": "This is a RESTful API for whisperX. Send the audio file and command line arguments in a POST request and get the transcription. This project's on GitHub: [whisperX-REST](https://github.com/AxesAccess/whisperX-REST). Questions and issues are [welcome](https://github.com/AxesAccess/whisperX-REST/issues/).",
         "version": "0.1.0",
         "title": "whisperX REST",
         "license": {

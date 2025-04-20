@@ -1,4 +1,4 @@
-[![Pylint](https://github.com/AlekseiPrishchepo/whisperX-REST/actions/workflows/pylint.yml/badge.svg)](https://github.com/AlekseiPrishchepo/whisperX-REST/actions/workflows/pylint.yml)
+[![Pylint](https://github.com/AxesAccess/whisperx-rest/actions/workflows/pylint.yml/badge.svg)](https://github.com/AxesAccess/whisperx-rest/actions/workflows/pylint.yml)
 
 # whisperX-REST
 The simplest yet fully functional RESTful API for [whisperX](https://github.com/m-bain/whisperX).
@@ -12,7 +12,7 @@ The simplest yet fully functional RESTful API for [whisperX](https://github.com/
 ##  Download ⤵️
 
 ```bash
-git clone https://github.com/AlekseiPrishchepo/whisperX-REST.git && cd whisperX-REST
+git clone https://github.com/AxesAccess/whisperx-rest.git && cd whisperx-rest
 ```
 
 ## Install ⚒️
