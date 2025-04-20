@@ -54,7 +54,7 @@ def transcribe_file():
 
     with TemporaryFile() as f:
         subprocess.call(
-            "conda run -n whisperx-env whisperx " + " ".join([filename] + params),
+            ".local/bin/whisperx " + " ".join([filename] + params),
             shell=True,
             stderr=f,
         )

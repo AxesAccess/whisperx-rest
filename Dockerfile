@@ -1,9 +1,9 @@
-FROM continuumio/miniconda3
+FROM python:3.12
 
 ENV PYTHONUNBUFFERED=1
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends ffmpeg git
+    apt-get install -y --no-install-recommends ffmpeg sudo
 
 RUN groupadd --gid 2000 appuser && \
     useradd --uid 2000 --gid appuser --shell /bin/bash --create-home appuser
@@ -13,21 +13,18 @@ COPY gunicorn.conf.py /home/appuser/gunicorn.conf.py
 
 RUN chown -R appuser /home/appuser/whisperx_rest/static
 
+RUN echo "appuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
 USER appuser
 WORKDIR /home/appuser
 
-RUN conda create -n whisperx-env python=3.10 
-RUN conda update -n base conda
-
-SHELL ["conda", "run", "-n", "whisperx-env", "/bin/bash", "-c"]
-
-RUN conda install -y python=3.10 pytorch=2.0.0 torchaudio=2.0.0 \
-    pytorch-cuda=11.8 -c nvidia -c pytorch
-RUN pip install flask gunicorn flask_swagger_ui
-RUN pip install git+https://github.com/m-bain/whisperx.git whisperx
+RUN pip install --no-cache-dir flask gunicorn flask_swagger_ui
+RUN pip install --no-cache-dir --default-timeout=120 whisperx
+ENV LD_LIBRARY_PATH=/home/appuser/.local/lib/python3.12/site-packages/nvidia/cudnn/lib
+ENV PATH=/home/appuser/.local/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin
 
 RUN python whisperx_rest/configure.py
 
 EXPOSE 5001
 
-ENTRYPOINT ["conda", "run", "-n", "whisperx-env", "gunicorn", "whisperx_rest.app:app"]
+ENTRYPOINT [".local/bin/gunicorn", "whisperx_rest.app:app"]
