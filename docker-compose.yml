@@ -1,0 +1,21 @@
+services:
+
+  whisperx:
+    container_name: whisperx-rest
+    restart: unless-stopped
+    build: .
+    volumes:
+      - whisperx_volume:/home/appuser/.cache/huggingface
+    ports:
+      - "5001:5001"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+
+volumes:
+  whisperx_volume:
+    external: true
