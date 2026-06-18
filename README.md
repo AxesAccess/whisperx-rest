@@ -35,9 +35,11 @@ First launch will trigger the download of additional files, which will slow down
 
 API returns result in a single output format, so you need to set `output_format` argument to `json`, `srt`, `tsv`, `txt`, or `vtt` instead of default `all`.
 
-If you choose `model` other than `small` (the default), the new model will be downloaded and stored in the container.
+If you choose `model` other than `small` (the default), the new model will be downloaded and stored in the container volume.
 
 Note that large models are demanding on GPU memory. You may want to adjust `batch_size` and `compute_type` parameters.
+
+To perform diarization, set `diarize` parameter to ` ` (space). This will trigger the download of the speaker embedding model from Hugging Face, so you need to provide API access token in `hf_token` parameter and ask a permission to access the model. 
 
 ### Swagger 🐰
 
