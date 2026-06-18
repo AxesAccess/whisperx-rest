@@ -4,7 +4,7 @@ import os
 import ast
 import inspect
 import json
-from whisperx import transcribe  # pylint: disable=import-error; type: ignore
+from whisperx import __main__ as whisperx_main  # pylint: disable=import-error; type: ignore
 
 
 def find_args(
@@ -38,7 +38,7 @@ def find_args(
 def main():
     """main function"""
     # Get source code of the whisperx cli module
-    module_source = inspect.getsource(transcribe)
+    module_source = inspect.getsource(whisperx_main)
     static_dir = os.path.dirname(__file__) + "/static"
 
     parameters = []
